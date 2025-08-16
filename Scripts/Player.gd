@@ -19,7 +19,7 @@ const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
 # Weapon sway variables
-const WEAPON_SWAY_AMOUNT = 10.0
+const WEAPON_SWAY_AMOUNT = 0.02
 const WEAPON_SWAY_SPEED = 0.9998253
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -27,7 +27,7 @@ var gravity: float = 9.8
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
-@onready var weapon_pivot: Node3D 
+@onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
 
 
 func _ready() -> void:

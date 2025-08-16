@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3v2iggb5epkf"]
+[gd_scene load_steps=5 format=3 uid="uid://c3v2iggb5epkf"]
 
 [ext_resource type="Script" uid="uid://bgc4j1vhg0u86" path="res://Scripts/Player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_cvnsp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wydro"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6t5aa"]
+albedo_texture = ExtResource("2_cvnsp")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv2_triplanar = true
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
@@ -15,3 +22,8 @@ shape = SubResource("CapsuleShape3D_wydro")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341569, -0.217496, -0.341015)
+size = Vector3(0.1, 0.1, 0.5)
+material = SubResource("StandardMaterial3D_6t5aa")
