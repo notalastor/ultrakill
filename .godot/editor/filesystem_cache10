@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1755187360
+::res://::1755272242
 ::res://models/::1755185372
 ::res://models/3D models/::1755185362
 ::res://models/textures/::1755185598
@@ -17,8 +17,8 @@ texture_10.png::CompressedTexture2D/CompressedTexture2D::1561197179278976665::17
 texture_11.png::CompressedTexture2D/CompressedTexture2D::8521015484367218419::1755185498::1755185498::1::::<><><>0<>0<>46c42345424717532bf671e0f82d17b2<>res://.godot/imported/texture_11.png-ee912620daadb2f6d6ac90754d99ac1d.ctex::
 texture_12.png::CompressedTexture2D/CompressedTexture2D::2956148735413989866::1755185498::1755185498::1::::<><><>0<>0<>28dece191a5ab9431752623ca8e43c8d<>res://.godot/imported/texture_12.png-b8794f99ba99ad2abe1b2bb764b14bca.ctex::
 texture_13.png::CompressedTexture2D/CompressedTexture2D::7995007574850384513::1755185498::1755185498::1::::<><><>0<>0<>08760161e67c88fe21f96a4e31efdb74<>res://.godot/imported/texture_13.png-a8c1ff4b02d01a8e93ea05c1bd2713b1.ctex::
-::res://Scenes/::1755187340
-player.tscn::PackedScene::6783134891736925621::1755187287::0::1::::<><><>0<>0<><>::uid://bgc4j1vhg0u86::::res://Scripts/Player.gd
-World.tscn::PackedScene::7285665154832654338::1755187340::0::1::::<><><>0<>0<><>::uid://c3v2iggb5epkf::::res://Scenes/player.tscn<>uid://cddmoo0jlyj3f::::res://models/textures/Dark/texture_03.png
-::res://Scripts/::1755186532
-Player.gd::GDScript::2813460764339855769::1755186532::0::1::::<>CharacterBody3D<><>0<>0<><>::
+::res://Scenes/::1755265048
+player.tscn::PackedScene::6783134891736925621::1755265048::0::1::::<><><>0<>0<><>::uid://bgc4j1vhg0u86::::res://Scripts/Player.gd
+World.tscn::PackedScene::7285665154832654338::1755265016::0::1::::<><><>0<>0<><>::uid://c3v2iggb5epkf::::res://Scenes/player.tscn<>uid://cddmoo0jlyj3f::::res://models/textures/Dark/texture_03.png
+::res://Scripts/::1755265016
+Player.gd::GDScript::2813460764339855769::1755265016::0::1::::<>CharacterBody3D<><>0<>0<><>::

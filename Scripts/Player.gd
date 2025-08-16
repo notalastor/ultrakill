@@ -39,8 +39,12 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		elif is_on_wall_only():
+			velocity = Vector3(get_wall_normal().x * JUMP_VELOCITY*2.5,JUMP_VELOCITY/1.5,get_wall_normal().z * JUMP_VELOCITY*2.5)
+			
 	
 	# Handle Sprint.
 	if Input.is_action_pressed("sprint"):
@@ -72,6 +76,7 @@ func _physics_process(delta):
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	
 	move_and_slide()
+	camera_tilt(input_dir,delta)
 
 
 func _headbob(time) -> Vector3:
@@ -79,3 +84,7 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
+
+func camera_tilt(input_x, delta):
+	if camera:
+		camera.rotation.z = lerp(camera.rotation.z, -input_x.x/10 , 10 * delta)
