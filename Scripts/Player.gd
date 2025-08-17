@@ -3,24 +3,36 @@ extends CharacterBody3D
 var mouse_movement: Vector2 = Vector2.ZERO
 var mouse_moved: bool = false
 
-var speed
+var speed: float
+var last_direction: Vector3
+var slide_direction: Vector3
+
+
 const WALK_SPEED: float = 7.0
 const SPRINT_SPEED: float = 10.0
+const SLIDE_SPEED: float = 15.0
 const JUMP_VELOCITY: float = 9.8
 const SENSITIVITY: float = 0.004
 
+var sprinting: bool
+var sliding: bool
+var slide_time_left: float = 0.0
+
+const SLIDE_DURATION: float = 1.0
+
+
 # Bob variables
-const BOB_FREQ = 2.4
-const BOB_AMP = 0.08
+const BOB_FREQ: float = 2.4
+const BOB_AMP: float = 0.08
 var t_bob: float = 0.0
 
 # FOV variables
-const BASE_FOV = 75.0
-const FOV_CHANGE = 1.5
+const BASE_FOV: float = 75.0
+const FOV_CHANGE: float = 1.5
 
 # Weapon sway variables
-const WEAPON_SWAY_AMOUNT = 0.02
-const WEAPON_SWAY_SPEED = 0.9998253
+const WEAPON_SWAY_AMOUNT: float = 0.02
+const WEAPON_SWAY_SPEED: float = 0.9998253
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = 9.8
@@ -38,48 +50,73 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 		mouse_moved = true
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		var adj_relative: Vector2 = event.relative * SENSITIVITY
+		head.rotate_y(-adj_relative.x)
+		camera.rotate_x(-adj_relative.y)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump"):
+		var jumped: bool = false
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			jumped = true
 		elif is_on_wall_only():
 			velocity = Vector3(get_wall_normal().x * JUMP_VELOCITY*2.5,JUMP_VELOCITY/1.5,get_wall_normal().z * JUMP_VELOCITY*2.5)
-	
+			jumped = true
+		if jumped:
+			sliding = false
+			slide_time_left = 0.0
+
+	if Input.is_action_just_pressed("slide") and sprinting and not sliding:
+		sliding = true
+		slide_time_left = SLIDE_DURATION
+		slide_direction = last_direction
+
 	# Handle Sprint.
 	if Input.is_action_pressed("sprint"):
+		sprinting = true
 		speed = SPRINT_SPEED
 	else:
+		sprinting = false
 		speed = WALK_SPEED
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var direction: Vector3 = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-		else:
-			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
-			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
+	last_direction = direction
+	if sliding:
+		if is_on_floor():
+			var slide_vel: Vector3 = slide_direction * SLIDE_SPEED * slide_time_left / SLIDE_DURATION
+			velocity = Vector3(slide_vel.x, velocity.y, slide_vel.z)
+		slide_time_left -= delta
+		if slide_time_left <= 0.0:
+			sliding = false
 	else:
-		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
-		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * speed
+				velocity.z = direction.z * speed
+			else:
+				velocity.x = lerpf(velocity.x, direction.x * speed, delta * 7.0)
+				velocity.z = lerpf(velocity.z, direction.z * speed, delta * 7.0)
+		else:
+			velocity.x = lerpf(velocity.x, direction.x * speed, delta * 3.0)
+			velocity.z = lerpf(velocity.z, direction.z * speed, delta * 3.0)
+
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
+
 	camera.transform.origin = _headbob(t_bob)
 
 	# FOV
-	var velocity_clamped: float = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var velocity_clamped: float = clampf(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov: float = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	move_and_slide()
@@ -88,6 +125,7 @@ func _physics_process(delta: float):
 	if mouse_moved:
 		mouse_moved = false
 	elif mouse_movement != Vector2.ZERO:
+		
 		mouse_movement = Vector2.ZERO
 
 
