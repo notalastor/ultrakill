@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://doyxp25wrec6o"]
+
+[ext_resource type="Script" uid="uid://wenk7x0gcx2s" path="res://Scripts/endpoint.gd" id="1_biuwk"]
+[ext_resource type="PackedScene" uid="uid://xmou6hpwjmp" path="res://models/ending.glb" id="2_0g6ej"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtoxv"]
+size = Vector3(1.95, 0.37, 2.015)
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_biuwk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mtoxv")
+debug_color = Color(0.125441, 0.863708, 1, 0.42)
+
+[node name="ending" parent="." instance=ExtResource("2_0g6ej")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
