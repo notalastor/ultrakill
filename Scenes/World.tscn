@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=10 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="PackedScene" uid="uid://c3v2iggb5epkf" path="res://Scenes/player.tscn" id="1_j0p05"]
+[ext_resource type="PackedScene" uid="uid://doyxp25wrec6o" path="res://Scenes/endpoint.tscn" id="2_5nsto"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_j0p05"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lq0h"]
@@ -77,5 +78,8 @@ use_collision = true
 radius = 3.0
 height = 10.25
 material = SubResource("StandardMaterial3D_gjpho")
+
+[node name="Area3D" parent="world/random shape3" instance=ExtResource("2_5nsto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33785, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_j0p05")]

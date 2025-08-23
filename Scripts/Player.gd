@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 var mouse_movement: Vector2 = Vector2.ZERO
@@ -6,6 +7,7 @@ var mouse_moved: bool = false
 var speed: float
 var last_direction: Vector3
 var slide_direction: Vector3
+
 
 const WALK_SPEED: float = 7.0
 const SPRINT_SPEED: float = 10.0
@@ -19,7 +21,7 @@ var slide_time_left: float = 0.0
 
 const SLIDE_DURATION: float = 1.5
 const SLIDE_BASE_SPEED: float = 0.25
-const CAMERA_Y_SLIDE_OFFSET: float = -0.375
+const CAMERA_Y_SLIDE_OFFSET: float = -0.75
 
 var current_cam_y_offset: float = 0.0
 var target_cam_y_offset: float = 0.0
@@ -73,11 +75,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			jumped = true
 		elif is_on_wall_only():
-			velocity = Vector3(
-				get_wall_normal().x * JUMP_VELOCITY * 2.5,
-				JUMP_VELOCITY / 1.5,
-				get_wall_normal().z * JUMP_VELOCITY * 2.5
-			)
+			velocity = Vector3(get_wall_normal().x * JUMP_VELOCITY * 2.5, JUMP_VELOCITY / 1.5, get_wall_normal().z * JUMP_VELOCITY * 2.5)
 			jumped = true
 		if jumped:
 			sliding = false
@@ -87,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		sliding = true
 		slide_time_left = SLIDE_DURATION
 		slide_direction = last_direction
-
+	
 	# Handle Sprint.
 	if Input.is_action_pressed("sprint"):
 		sprinting = true
@@ -100,10 +98,9 @@ func _physics_process(delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("left", "right", "up", "down")
 	var direction: Vector3 = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	last_direction = direction
-
 	if sliding:
 		if is_on_floor():
-			var slide_vel: Vector3 = slide_direction * SLIDE_SPEED * slide_time_left / SLIDE_DURATION + SLIDE_BASE_SPEED * Vector3.ONE
+			var slide_vel: Vector3 = slide_direction * (SLIDE_SPEED * slide_time_left / SLIDE_DURATION + SLIDE_BASE_SPEED)
 			velocity = Vector3(slide_vel.x, velocity.y, slide_vel.z)
 		slide_time_left -= delta
 		if slide_time_left <= 0.0:
@@ -120,25 +117,25 @@ func _physics_process(delta: float) -> void:
 			velocity.x = lerpf(velocity.x, direction.x * speed, delta * 3.0)
 			velocity.z = lerpf(velocity.z, direction.z * speed, delta * 3.0)
 
-	# Head bob new code 
-	t_bob += delta * velocity.length() * float(is_on_floor())
+	# Head bob
+	if not sliding:
+		t_bob += delta * velocity.length() * float(is_on_floor())
 
-# kalau sliding → turun, kalau tidak → balik normal
-	target_cam_y_offset = CAMERA_Y_SLIDE_OFFSET if sliding else 0.0
-	current_cam_y_offset = lerp(current_cam_y_offset, target_cam_y_offset, delta * 10.0)
+	target_cam_y_offset = CAMERA_Y_SLIDE_OFFSET * float(sliding)
+	current_cam_y_offset = lerpf(current_cam_y_offset, target_cam_y_offset, 1.0 - (1.0 - CAM_Y_OFFSET_FOLLOW_SPEED)**delta)
 
 	camera.transform.origin = _headbob(t_bob) + current_cam_y_offset * Vector3.UP
-
 
 	# FOV
 	var velocity_clamped: float = clampf(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov: float = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
-
+	
+	# These function calls and if/else blocks must be at the same indentation level as the other code in _physics_process.
 	move_and_slide()
 	camera_tilt(input_dir, delta)
 	weapon_sway(delta)
-
+	
 	if mouse_moved:
 		mouse_moved = false
 	elif mouse_movement != Vector2.ZERO:
@@ -154,10 +151,10 @@ func _headbob(time: float) -> Vector3:
 
 func camera_tilt(input_vector: Vector2, delta: float) -> void:
 	if camera:
-		camera.rotation.z = lerpf(camera.rotation.z, -input_vector.x / 10, 10 * delta)
+		camera.rotation.z = lerpf(camera.rotation.z, -input_vector.x/10, 10 * delta)
 
 
 func weapon_sway(delta: float) -> void:
 	if weapon_pivot:
-		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - (1.0 - WEAPON_SWAY_SPEED) ** delta)
-		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - (1.0 - WEAPON_SWAY_SPEED) ** delta)
+		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
+		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
