@@ -8,11 +8,12 @@ var speed: float
 var last_direction: Vector3
 var slide_direction: Vector3
 
-
-const WALK_SPEED: float = 7.0
-const SPRINT_SPEED: float = 10.0
-const SLIDE_SPEED: float = 15.0
-const JUMP_VELOCITY: float = 9.8
+var knockback: Vector3
+var knock_timer: float
+var WALK_SPEED: float = 7.0
+var SPRINT_SPEED: float = 10.0
+var SLIDE_SPEED: float = 15.0
+var JUMP_VELOCITY: float = 9.8
 const SENSITIVITY: float = 0.004
 
 var sprinting: bool
@@ -48,9 +49,12 @@ var gravity: float = 9.8
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
 
+@onready var animation: AnimationPlayer = $AnimationPlayer
+var change_scene: bool
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	animation.play_backwards("fade")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -60,7 +64,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var adj_relative: Vector2 = event.relative * SENSITIVITY
 		head.rotate_y(-adj_relative.x)
 		camera.rotate_x(-adj_relative.y)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 
 func _physics_process(delta: float) -> void:
@@ -71,17 +75,17 @@ func _physics_process(delta: float) -> void:
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump"):
 		var jumped: bool = false
-		if is_on_floor():
+		if is_on_floor_only():
 			velocity.y = JUMP_VELOCITY
 			jumped = true
-		elif is_on_wall_only():
+		if is_on_wall_only():
 			velocity = Vector3(get_wall_normal().x * JUMP_VELOCITY * 2.5, JUMP_VELOCITY / 1.5, get_wall_normal().z * JUMP_VELOCITY * 2.5)
 			jumped = true
 		if jumped:
 			sliding = false
 			slide_time_left = 0.0
 
-	if Input.is_action_just_pressed("slide") and sprinting and not sliding:
+	if Input.is_action_just_pressed("slide") and sprinting and not sliding and is_on_floor():
 		sliding = true
 		slide_time_left = SLIDE_DURATION
 		slide_direction = last_direction
@@ -95,28 +99,32 @@ func _physics_process(delta: float) -> void:
 		speed = WALK_SPEED
 
 	# Get the input direction and handle the movement/deceleration.
-	var input_dir: Vector2 = Input.get_vector("left", "right", "up", "down")
-	var direction: Vector3 = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	last_direction = direction
-	if sliding:
-		if is_on_floor():
-			var slide_vel: Vector3 = slide_direction * (SLIDE_SPEED * slide_time_left / SLIDE_DURATION + SLIDE_BASE_SPEED)
-			velocity = Vector3(slide_vel.x, velocity.y, slide_vel.z)
-		slide_time_left -= delta
-		if slide_time_left <= 0.0:
-			sliding = false
-	else:
-		if is_on_floor():
-			if direction:
-				velocity.x = direction.x * speed
-				velocity.z = direction.z * speed
-			else:
-				velocity.x = lerpf(velocity.x, direction.x * speed, delta * 7.0)
-				velocity.z = lerpf(velocity.z, direction.z * speed, delta * 7.0)
+	if knock_timer <= 0.0:
+		
+		var input_dir: Vector2 = Input.get_vector("left", "right", "up", "down")
+		camera_tilt(input_dir, delta)
+		var direction: Vector3 = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		last_direction = direction
+		if sliding:
+			if is_on_floor():
+				var slide_vel: Vector3 = slide_direction * (SLIDE_SPEED * slide_time_left / SLIDE_DURATION + SLIDE_BASE_SPEED)
+				velocity = Vector3(slide_vel.x, velocity.y, slide_vel.z)
+			slide_time_left -= delta
+			if slide_time_left <= 0.0:
+				sliding = false
 		else:
-			velocity.x = lerpf(velocity.x, direction.x * speed, delta * 3.0)
-			velocity.z = lerpf(velocity.z, direction.z * speed, delta * 3.0)
-
+			if is_on_floor():
+				if direction:
+					velocity.x = direction.x * speed
+					velocity.z = direction.z * speed
+				else:
+					velocity.x = lerpf(velocity.x, direction.x * speed, delta * 7.0)
+					velocity.z = lerpf(velocity.z, direction.z * speed, delta * 7.0)
+			else:
+				velocity.x = lerpf(velocity.x, direction.x * speed, delta * 3.0)
+				velocity.z = lerpf(velocity.z, direction.z * speed, delta * 3.0)
+	else:
+		knock_back_apply(delta)
 	# Head bob
 	if not sliding:
 		t_bob += delta * velocity.length() * float(is_on_floor())
@@ -133,13 +141,14 @@ func _physics_process(delta: float) -> void:
 	
 	# These function calls and if/else blocks must be at the same indentation level as the other code in _physics_process.
 	move_and_slide()
-	camera_tilt(input_dir, delta)
+
 	weapon_sway(delta)
-	
 	if mouse_moved:
 		mouse_moved = false
 	elif mouse_movement != Vector2.ZERO:
 		mouse_movement = Vector2.ZERO
+	if change_scene:
+		change_effect()
 
 
 func _headbob(time: float) -> Vector3:
@@ -158,3 +167,15 @@ func weapon_sway(delta: float) -> void:
 	if weapon_pivot:
 		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
 		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
+
+func change_effect():
+	animation.play("fade")
+	change_scene = false
+
+func knock_back(dir: Vector3, force: float, duration: float):
+	knockback = dir * force
+	knock_timer = duration
+
+func knock_back_apply(delta):
+	velocity = knockback
+	knock_timer -= delta

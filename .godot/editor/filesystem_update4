@@ -1,3 +1,9 @@
 res://Scenes/World.tscn
+res://Scenes/vanish.gdshader
+res://Scenes/endpoint.gdshader
 res://Scenes/player.tscn
-res://Scripts/Player.gd
+res://Scenes/endpoint.tscn
+res://Scenes/enemy.tscn
+res://Scenes/fireball.tscn
+res://Scenes/fireball.gd
+res://firstenemy.gd

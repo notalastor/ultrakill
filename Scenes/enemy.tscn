@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://rfev0mjyx5v5"]
+
+[ext_resource type="Script" uid="uid://c4488k4kj3ml7" path="res://firstenemy.gd" id="1_hghv2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1f0kj"]
+height = 1.755
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hghv2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_afpow"]
+material = SubResource("StandardMaterial3D_hghv2")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0830c"]
+height = 1.755
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hghv2"]
+size = Vector3(1.31, 1.68, 1)
+
+[node name="enemy" type="CharacterBody3D"]
+script = ExtResource("1_hghv2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1f0kj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.70474e-08, 0.39, 0, -0.39, -1.70474e-08, 0, 0, 0, 0.39, 0, 0.409678, -0.321241)
+mesh = SubResource("CapsuleMesh_afpow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_0830c")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.944075)
+shape = SubResource("BoxShape3D_hghv2")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="shoot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14618, -0.0218813)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
