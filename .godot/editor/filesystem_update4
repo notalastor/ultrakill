@@ -5,5 +5,3 @@ res://Scenes/player.tscn
 res://Scenes/endpoint.tscn
 res://Scenes/enemy.tscn
 res://Scenes/fireball.tscn
-res://Scenes/fireball.gd
-res://firstenemy.gd
