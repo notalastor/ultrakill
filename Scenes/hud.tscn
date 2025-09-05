@@ -1,0 +1,158 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxe84evs26vxv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fccik"]
+bg_color = Color(0.48633, 0.632803, 0.686469, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjfho"]
+bg_color = Color(0.16, 0.776, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gfia"]
+bg_color = Color(0.57, 0.3819, 0.3819, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0onf"]
+bg_color = Color(1, 0.188235, 0.160784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fbih"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_top = 3.0
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Anchor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ProgressBars" type="VBoxContainer" parent="Anchor"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -138.0
+offset_right = 355.0
+offset_bottom = -92.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Anchor/ProgressBars"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 3.55
+theme_override_constants/separation = -2
+
+[node name="CombatBar1" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(85, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_fccik")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bjfho")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="CombatBar2" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(85, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_fccik")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bjfho")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="CombatBar3" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(85, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_fccik")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bjfho")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(250, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_styles/background = SubResource("StyleBoxFlat_3gfia")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e0onf")
+value = 80.0
+rounded = true
+show_percentage = false
+
+[node name="Bullet" type="Panel" parent="Anchor/ProgressBars/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 27)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+size_flags_stretch_ratio = 28.35
+theme_override_styles/panel = SubResource("StyleBoxFlat_6fbih")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/Bullet"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="CurrentAmount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "6"
+
+[node name="Amount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.9, 0.018, 0.5325, 1)
+theme_override_font_sizes/font_size = 16
+text = "32"
