@@ -1,13 +1,23 @@
 class_name Player
 extends CharacterBody3D
 
-var mouse_movement: Vector2 = Vector2.ZERO
-var mouse_moved: bool = false
+# -------------------
+# PLAYER STATS
+# -------------------
+var max_health: int = 100
+var health: int = 100
 
+var max_ammo: int = 30
+var ammo: int = 30
+var is_reloading: bool = false
+var reload_time: float = 1.5
+
+# -------------------
+# MOVEMENT VARIABLES
+# -------------------
 var speed: float
 var last_direction: Vector3
 var slide_direction: Vector3
-
 var knockback: Vector3
 var knock_timer: float
 var WALK_SPEED: float = 7.0
@@ -26,7 +36,6 @@ const CAMERA_Y_SLIDE_OFFSET: float = -0.75
 
 var current_cam_y_offset: float = 0.0
 var target_cam_y_offset: float = 0.0
-
 const CAM_Y_OFFSET_FOLLOW_SPEED: float = 0.999825
 
 # Bob variables
@@ -42,15 +51,21 @@ const FOV_CHANGE: float = 1.5
 const WEAPON_SWAY_AMOUNT: float = 0.02
 const WEAPON_SWAY_SPEED: float = 0.9998253
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+# Gravity
 var gravity: float = 9.8
 
+# Mouse
+var mouse_movement: Vector2 = Vector2.ZERO
+var mouse_moved: bool = false
+
+# Scene references
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
-
 @onready var animation: AnimationPlayer = $AnimationPlayer
-var change_scene: bool
+
+var change_scene: bool = false
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -68,11 +83,25 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# -------------------
+	# HEALTH & AMMO TEST
+	# -------------------
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+
+	if Input.is_action_just_pressed("reload"):
+		if not is_reloading:
+			start_reload()
+
+	# -------------------
+	# GRAVITY
+	# -------------------
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Handle Jump.
+	# -------------------
+	# JUMP
+	# -------------------
 	if Input.is_action_just_pressed("jump"):
 		var jumped: bool = false
 		if is_on_floor_only():
@@ -85,12 +114,17 @@ func _physics_process(delta: float) -> void:
 			sliding = false
 			slide_time_left = 0.0
 
+	# -------------------
+	# SLIDE
+	# -------------------
 	if Input.is_action_just_pressed("slide") and sprinting and not sliding and is_on_floor():
 		sliding = true
 		slide_time_left = SLIDE_DURATION
 		slide_direction = last_direction
-	
-	# Handle Sprint.
+
+	# -------------------
+	# SPRINT
+	# -------------------
 	if Input.is_action_pressed("sprint"):
 		sprinting = true
 		speed = SPRINT_SPEED
@@ -98,9 +132,10 @@ func _physics_process(delta: float) -> void:
 		sprinting = false
 		speed = WALK_SPEED
 
-	# Get the input direction and handle the movement/deceleration.
+	# -------------------
+	# MOVEMENT
+	# -------------------
 	if knock_timer <= 0.0:
-		
 		var input_dir: Vector2 = Input.get_vector("left", "right", "up", "down")
 		camera_tilt(input_dir, delta)
 		var direction: Vector3 = (head.transform.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -125,31 +160,53 @@ func _physics_process(delta: float) -> void:
 				velocity.z = lerpf(velocity.z, direction.z * speed, delta * 3.0)
 	else:
 		knock_back_apply(delta)
-	# Head bob
+
+	# -------------------
+	# HEAD BOB
+	# -------------------
 	if not sliding:
 		t_bob += delta * velocity.length() * float(is_on_floor())
 
 	target_cam_y_offset = CAMERA_Y_SLIDE_OFFSET * float(sliding)
-	current_cam_y_offset = lerpf(current_cam_y_offset, target_cam_y_offset, 1.0 - (1.0 - CAM_Y_OFFSET_FOLLOW_SPEED)**delta)
+	current_cam_y_offset = lerpf(current_cam_y_offset, target_cam_y_offset, 1.0 - (1.0 - CAM_Y_OFFSET_FOLLOW_SPEED) ** delta)
 
 	camera.transform.origin = _headbob(t_bob) + current_cam_y_offset * Vector3.UP
 
+	# -------------------
 	# FOV
+	# -------------------
 	var velocity_clamped: float = clampf(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov: float = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
-	
-	# These function calls and if/else blocks must be at the same indentation level as the other code in _physics_process.
+
+	# -------------------
+	# MOVEMENT APPLY
+	# -------------------
 	move_and_slide()
 
+	# -------------------
+	# WEAPON SWAY
+	# -------------------
 	weapon_sway(delta)
+
+	# -------------------
+	# RESET MOUSE STATE
+	# -------------------
 	if mouse_moved:
 		mouse_moved = false
 	elif mouse_movement != Vector2.ZERO:
 		mouse_movement = Vector2.ZERO
+
+	# -------------------
+	# SCENE CHANGE
+	# -------------------
 	if change_scene:
 		change_effect()
 
+
+# ===================
+# EXTRA FUNCTIONS
+# ===================
 
 func _headbob(time: float) -> Vector3:
 	var pos: Vector3 = Vector3.ZERO
@@ -157,11 +214,9 @@ func _headbob(time: float) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
 
-
 func camera_tilt(input_vector: Vector2, delta: float) -> void:
 	if camera:
-		camera.rotation.z = lerpf(camera.rotation.z, -input_vector.x/10, 10 * delta)
-
+		camera.rotation.z = lerpf(camera.rotation.z, -input_vector.x / 10, 10 * delta)
 
 func weapon_sway(delta: float) -> void:
 	if weapon_pivot:
@@ -176,6 +231,41 @@ func knock_back(dir: Vector3, force: float, duration: float):
 	knockback = dir * force
 	knock_timer = duration
 
-func knock_back_apply(delta):
+func knock_back_apply(delta: float):
 	velocity = knockback
 	knock_timer -= delta
+
+
+# ===================
+# HEALTH & AMMO LOGIC
+# ===================
+func take_damage(amount: int) -> void:
+	print("Player HP: ", health)
+	health = max(0, health - amount)
+	HUD.instance.display_health(health)
+
+func shoot() -> void:
+	if is_reloading:
+		return
+	if ammo > 0:
+		ammo -= 1
+		print("Bang! Ammo left:", ammo)
+		update_ammo_ui()
+	else:
+		print("No ammo! Press reload.")
+
+func start_reload() -> void:
+	if ammo == max_ammo:
+		return
+	is_reloading = true
+	print("Reloading...")
+	await get_tree().create_timer(reload_time).timeout
+	ammo = max_ammo
+	is_reloading = false
+	print("Reloaded. Ammo:", ammo)
+	update_ammo_ui()
+	
+# Hud UPDATES 
+func update_ammo_ui():
+	HUD.instance.display_ammo(ammo, max_ammo)
+ 
