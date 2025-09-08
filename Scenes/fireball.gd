@@ -14,6 +14,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		var knock_dir = (body.global_position - global_position).normalized()
 		knock_dir.y /= 2
 		body.knock_back(knock_dir,force,knock_time)
+		body.take_damage(20)
 		queue_free()
 	else:
 		if not body is CharacterBody3D:

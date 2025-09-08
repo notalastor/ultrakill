@@ -2,9 +2,9 @@ class_name HUD
 extends CanvasLayer
 
 
-@onready var ammo_curr_amount_label: Label = %CurrentAmount
-@onready var ammo_max_amount_label: Label = %Amount
-@onready var health_bar: ProgressBar = %HealthBar
+@onready var ammo_curr_amount_label: Label = $Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer/CurrentAmount
+@onready var ammo_max_amount_label: Label = $Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer/Amount
+@onready var health_bar: ProgressBar = $Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HealthBar
 
 static var instance: HUD
 

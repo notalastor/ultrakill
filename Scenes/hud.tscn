@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxe84evs26vxv"]
+[gd_scene load_steps=7 format=3 uid="uid://cxe84evs26vxv"]
+
+[ext_resource type="Script" uid="uid://d0akct6g5ys1s" path="res://Scripts/hud.gd" id="1_e0onf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fccik"]
 bg_color = Color(0.48633, 0.632803, 0.686469, 1)
@@ -49,6 +51,7 @@ corner_radius_bottom_left = 6
 expand_margin_top = 3.0
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_e0onf")
 
 [node name="Anchor" type="Control" parent="."]
 layout_mode = 3
@@ -123,7 +126,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_3gfia")
 theme_override_styles/fill = SubResource("StyleBoxFlat_e0onf")
-value = 80.0
+value = 100.0
 rounded = true
 show_percentage = false
 
@@ -148,11 +151,11 @@ alignment = 1
 [node name="CurrentAmount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
-text = "6"
+text = "--"
 
 [node name="Amount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.9, 0.018, 0.5325, 1)
 theme_override_font_sizes/font_size = 16
-text = "32"
+text = "--"

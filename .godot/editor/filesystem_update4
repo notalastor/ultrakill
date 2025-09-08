@@ -1,8 +1,12 @@
-res://Scenes/hud.tscn
+res://Scenes/World.tscn
 res://Scenes/vanish.gdshader
 res://Scenes/endpoint.gdshader
 res://Scenes/player.tscn
-res://Scenes/World.tscn
 res://Scenes/endpoint.tscn
 res://Scenes/enemy.tscn
 res://Scenes/fireball.tscn
+res://Scenes/hud.tscn
+res://Scripts/hud.gd
+res://Scripts/Player.gd
+res://Scenes/fireball.gd
+res://firstenemy.gd

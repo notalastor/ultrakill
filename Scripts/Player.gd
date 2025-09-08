@@ -7,11 +7,11 @@ extends CharacterBody3D
 var max_health: int = 100
 var health: int = 100
 
-var max_ammo: int = 30
+var max_ammo: int = 20
 var ammo: int = 30
 var is_reloading: bool = false
 var reload_time: float = 1.5
-
+var reload_ammount: int = 30
 # -------------------
 # MOVEMENT VARIABLES
 # -------------------
@@ -240,9 +240,17 @@ func knock_back_apply(delta: float):
 # HEALTH & AMMO LOGIC
 # ===================
 func take_damage(amount: int) -> void:
-	print("Player HP: ", health)
-	health = max(0, health - amount)
-	HUD.instance.display_health(health)
+	if change_scene == false:
+		print("Player HP: ", health)
+		if health >= 10 and health - amount != 0:
+			health -= amount
+			HUD.instance.display_health(health)
+		else: 
+			
+			change_scene = true
+			await get_tree().create_timer(2).timeout
+			get_tree().reload_current_scene()
+
 
 func shoot() -> void:
 	if is_reloading:
@@ -255,14 +263,20 @@ func shoot() -> void:
 		print("No ammo! Press reload.")
 
 func start_reload() -> void:
-	if ammo == max_ammo:
+	if ammo == reload_ammount or max_ammo == 0:
 		return
+	
 	is_reloading = true
 	print("Reloading...")
 	await get_tree().create_timer(reload_time).timeout
-	ammo = max_ammo
+	
+	var empty_space = reload_ammount - ammo
+	var how_much: int = min(empty_space, max_ammo)
+	
+	ammo += how_much
+	max_ammo -= how_much
+	
 	is_reloading = false
-	print("Reloaded. Ammo:", ammo)
 	update_ammo_ui()
 	
 # Hud UPDATES 
