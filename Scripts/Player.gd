@@ -63,6 +63,7 @@ var mouse_moved: bool = false
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
 @onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var shoot_point: Node3D = %ShootPoint
 
 var change_scene: bool = false
 
@@ -250,12 +251,18 @@ func take_damage(amount: int) -> void:
 			change_scene = true
 			await get_tree().create_timer(2).timeout
 			get_tree().reload_current_scene()
-
+			
+func launch_bullet(bullet: PlayerBullet, launch_position: Vector3, launch_direction: Vector3, launch_speed: float) -> void:
+	bullet.linear_velocity = launch_direction * launch_speed
+	bullet.global_position = launch_position
+	bullet.add_collision_exception_with(self)
+	get_parent().add_child(bullet)
 
 func shoot() -> void:
 	if is_reloading:
 		return
 	if ammo > 0:
+		launch_bullet(preload("res://Scenes/player_bullet.tscn").instantiate(), shoot_point.global_position, -shoot_point.global_transform.basis[2].normalized(), 75.0)
 		ammo -= 1
 		print("Bang! Ammo left:", ammo)
 		update_ammo_ui()
