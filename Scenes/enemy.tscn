@@ -17,8 +17,9 @@ height = 1.755
 [sub_resource type="BoxShape3D" id="BoxShape3D_hghv2"]
 size = Vector3(1.31, 1.68, 1)
 
-[node name="enemy" type="CharacterBody3D"]
+[node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("mesh_instances")]
 script = ExtResource("1_hghv2")
+mesh_instances = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D2")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_1f0kj")
