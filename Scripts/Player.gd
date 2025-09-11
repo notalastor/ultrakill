@@ -254,7 +254,7 @@ func take_damage(amount: int) -> void:
 			
 func launch_bullet(bullet: PlayerBullet, launch_position: Vector3, launch_direction: Vector3, launch_speed: float) -> void:
 	bullet.linear_velocity = launch_direction * launch_speed
-	bullet.global_position = launch_position
+	bullet.position = get_parent().to_local(launch_position)
 	bullet.add_collision_exception_with(self)
 	get_parent().add_child(bullet)
 

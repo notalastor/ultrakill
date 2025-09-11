@@ -74,9 +74,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341569, -0.217496, -0.34101
 size = Vector3(0.1, 0.1, 0.5)
 material = SubResource("StandardMaterial3D_6t5aa")
 
-[node name="ShootPoint" type="Marker3D" parent="Head/Camera3D"]
+[node name="ShootPoint" type="Marker3D" parent="Head/Camera3D/CSGBox3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341547, -0.21722, -0.61881)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.008, -0.246)
 
 [node name="HUD" parent="." instance=ExtResource("4_vgqql")]
 
