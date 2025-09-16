@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxe84evs26vxv"]
+[gd_scene load_steps=10 format=3 uid="uid://cxe84evs26vxv"]
 
 [ext_resource type="Script" uid="uid://d0akct6g5ys1s" path="res://Scripts/hud.gd" id="1_e0onf"]
 
@@ -49,6 +49,41 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 expand_margin_top = 3.0
+
+[sub_resource type="Animation" id="Animation_fccik"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_e0onf"]
+resource_name = "effect"
+length = 0.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjfho"]
+_data = {
+&"RESET": SubResource("Animation_fccik"),
+&"effect": SubResource("Animation_e0onf")
+}
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_e0onf")
@@ -159,3 +194,19 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.9, 0.018, 0.5325, 1)
 theme_override_font_sizes/font_size = 16
 text = "--"
+
+[node name="ColorRect" type="ColorRect" parent="Anchor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0)
+
+[node name="DamageEffectAnimation" type="AnimationPlayer" parent="Anchor/ColorRect"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_bjfho")
+}

@@ -1,5 +1,4 @@
-extends CharacterBody3D
-
+extends Enemy
 
 @export var SPEED: float = 5.0 ## سرعة العدو
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
@@ -9,7 +8,9 @@ extends CharacterBody3D
 @export var force: float = 15.0 ##قوة/ بعد الضربة 
 @export var knock_time: float = 0.2 ##المدة اللازمه لتوقف تأثير الضربه
 @export var shooter: bool
+
 func _ready() -> void:
+	super._ready()
 	if shooter:
 		$Timer.autostart = true
 		$Timer.start()

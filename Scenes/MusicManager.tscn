@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwevmp2c8142q"]
+
+[ext_resource type="AudioStream" uid="uid://bhu6d4y5024ci" path="res://Level 1 - Above the iron fury.mp3" id="1_iysw5"]
+
+[node name="Node" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_iysw5")
+volume_db = -16.0
+autoplay = true

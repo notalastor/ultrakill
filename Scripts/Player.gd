@@ -245,6 +245,7 @@ func take_damage(amount: int) -> void:
 		print("Player HP: ", health)
 		if health >= 10 and health - amount != 0:
 			health -= amount
+			HUD.instance.display_damage_effect()
 			HUD.instance.display_health(health)
 		else: 
 			
