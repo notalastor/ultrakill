@@ -5,7 +5,11 @@ extends CharacterBody3D
 # PLAYER STATS
 # -------------------
 var max_health: int = 100
-var health: int = 100
+var health: float = max_health:
+	set(value):
+		var adjusted_health: float = clampf(value, 0.0, max_health)
+		HUD.instance.display_health(adjusted_health)
+		health = adjusted_health
 
 var max_ammo: int = 20
 var ammo: int = 30

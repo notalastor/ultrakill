@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkxlett7syrfl"]
+
+[ext_resource type="PackedScene" uid="uid://bqvb2me8wc475" path="res://Scenes/powerup_base.tscn" id="1_lxmqd"]
+[ext_resource type="Script" uid="uid://pk3n2jvfuhdb" path="res://Scripts/health_powerup.gd" id="2_144cr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxmqd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_144cr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jmfcc"]
+material = SubResource("StandardMaterial3D_144cr")
+
+[node name="Area3D" instance=ExtResource("1_lxmqd")]
+script = ExtResource("2_144cr")
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_lxmqd")
+
+[node name="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("BoxMesh_jmfcc")
