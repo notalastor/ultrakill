@@ -11,6 +11,8 @@ extends Enemy
 
 func _ready() -> void:
 	super._ready()
+	if !is_instance_valid(target):
+		target = Player.instance
 	if shooter:
 		$Timer.autostart = true
 		$Timer.start()
