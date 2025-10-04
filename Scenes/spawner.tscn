@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://csbsjda3h8k6f"]
+
+[ext_resource type="Script" uid="uid://u2btocrcwo7p" path="res://spawner.gd" id="1_2bop2"]
+[ext_resource type="PackedScene" uid="uid://rfev0mjyx5v5" path="res://Scenes/enemy.tscn" id="2_mdv8j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xhbpr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ydn3"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_2bop2")
+enemies = Array[PackedScene]([ExtResource("2_mdv8j")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xhbpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_2ydn3")

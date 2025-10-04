@@ -62,6 +62,9 @@ var gravity: float = 9.8
 var mouse_movement: Vector2 = Vector2.ZERO
 var mouse_moved: bool = false
 
+# Player active instance
+static var instance: Player
+
 # Scene references
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -71,6 +74,8 @@ var mouse_moved: bool = false
 
 var change_scene: bool = false
 
+func _enter_tree() -> void:
+	Player.instance = self
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
