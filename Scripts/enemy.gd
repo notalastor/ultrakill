@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var mesh_instances: Array[MeshInstance3D] = []
 @onready var damage_effect_timer: Timer = Timer.new()
 @export var initial_health: float = 50.0
+@export var explosion: PackedScene
 
 var health: float = initial_health:
 	set(value):
@@ -28,11 +29,13 @@ func _ready() -> void:
 func apply_mat_override_to_mesh_instances(material: Material) -> void:
 	for mesh_instance: MeshInstance3D in mesh_instances:
 		mesh_instance.material_override = material
-		print(mesh_instance)
-		print(mesh_instance.material_override)
 
 func take_damage(amount: float) -> void:
 	health -= amount
 
 func die() -> void:
+	if is_instance_valid(explosion):
+		var expl: Node3D = explosion.instantiate()
+		expl.position = position
+		get_parent().add_child(expl)
 	queue_free()

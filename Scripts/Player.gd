@@ -80,6 +80,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	animation.play_backwards("fade")
+	update_ammo_ui()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -294,6 +295,10 @@ func start_reload() -> void:
 	max_ammo -= how_much
 	
 	is_reloading = false
+	update_ammo_ui()
+
+func add_max_ammo(amount: int) -> void:
+	max_ammo += amount
 	update_ammo_ui()
 	
 # Hud UPDATES 

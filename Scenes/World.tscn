@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=15 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="PackedScene" uid="uid://c3v2iggb5epkf" path="res://Scenes/player.tscn" id="1_j0p05"]
 [ext_resource type="PackedScene" uid="uid://doyxp25wrec6o" path="res://Scenes/endpoint.tscn" id="2_5nsto"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rfev0mjyx5v5" path="res://Scenes/enemy.tscn" id="4_gjpho"]
 [ext_resource type="PackedScene" uid="uid://bkxlett7syrfl" path="res://Scenes/health_powerup.tscn" id="5_p70al"]
 [ext_resource type="PackedScene" uid="uid://csbsjda3h8k6f" path="res://Scenes/spawner.tscn" id="6_45d1s"]
+[ext_resource type="PackedScene" uid="uid://k58g00l0kt0t" path="res://Scenes/ammo_powerup.tscn" id="7_y7y61"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lq0h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -112,3 +113,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1458, 0.5, -29.4412)
 
 [node name="Area3D3" parent="." instance=ExtResource("6_45d1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.995, 0.5, -58.4982)
+
+[node name="AmmoPowerup" parent="." instance=ExtResource("7_y7y61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5043, 0, -28.7005)

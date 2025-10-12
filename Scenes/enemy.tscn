@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://rfev0mjyx5v5"]
+[gd_scene load_steps=8 format=3 uid="uid://rfev0mjyx5v5"]
 
 [ext_resource type="Script" uid="uid://c4488k4kj3ml7" path="res://firstenemy.gd" id="1_hghv2"]
+[ext_resource type="PackedScene" path="res://Scenes/enemy_explosion.tscn" id="2_1f0kj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1f0kj"]
 height = 1.755
@@ -20,6 +21,7 @@ size = Vector3(1.31, 1.68, 1)
 [node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("mesh_instances")]
 script = ExtResource("1_hghv2")
 mesh_instances = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D2")]
+explosion = ExtResource("2_1f0kj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_1f0kj")

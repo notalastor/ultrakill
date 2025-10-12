@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://vs4vbkvq6mk8"]
+
+[ext_resource type="QuadMesh" uid="uid://b2kc6wwxxd5di" path="res://Meshes/particle_circle_quad.tres" id="1_8wtjd"]
+[ext_resource type="Curve" uid="uid://vuwsckbmvwq" path="res://Curves/scale_down_curve.tres" id="2_yv76b"]
+[ext_resource type="Gradient" uid="uid://c3u4og8vx54ar" path="res://Gradients/basic_white_alpha_gradient.tres" id="3_n7ylu"]
+[ext_resource type="Script" uid="uid://bg8wtfsyfm5v3" path="res://Scripts/particles_auto_emit.gd" id="4_x43in"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ys0dy"]
+
+[sub_resource type="Curve" id="Curve_8wtjd"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 0.338983), 0.0, 0.0, 0, 0, Vector2(0.0222222, 5), 0.0, 0.0, 0, 0, Vector2(0.0888889, 1.09399), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="CPUParticles3D" type="CPUParticles3D"]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("BoxMesh_ys0dy")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+scale_amount_min = 0.25
+scale_amount_max = 0.5
+scale_amount_curve = ExtResource("2_yv76b")
+color = Color(1, 0.341176, 0.0784314, 1)
+color_ramp = ExtResource("3_n7ylu")
+script = ExtResource("4_x43in")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 1.0
+mesh = ExtResource("1_8wtjd")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_8wtjd")
+color = Color(1, 0.341176, 0.0784314, 1)
+color_ramp = ExtResource("3_n7ylu")

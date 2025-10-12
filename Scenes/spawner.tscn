@@ -1,18 +1,107 @@
-[gd_scene load_steps=5 format=3 uid="uid://csbsjda3h8k6f"]
+[gd_scene load_steps=11 format=3 uid="uid://csbsjda3h8k6f"]
 
 [ext_resource type="Script" uid="uid://u2btocrcwo7p" path="res://spawner.gd" id="1_2bop2"]
 [ext_resource type="PackedScene" uid="uid://rfev0mjyx5v5" path="res://Scenes/enemy.tscn" id="2_mdv8j"]
+[ext_resource type="Shader" uid="uid://jbymnpyslmyy" path="res://Scenes/spawner_effect.gdshader" id="3_xhbpr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xhbpr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2ydn3"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ydn3"]
+render_priority = 0
+shader = ExtResource("3_xhbpr")
+shader_parameter/amount = 31.67
+shader_parameter/move = 0.163
+shader_parameter/bandsize = 0.1
+shader_parameter/speed = 0.66
+shader_parameter/wave_color = Vector3(4.35, 2.945, 1)
+shader_parameter/alpha_threshold = 0.4
+shader_parameter/showing_point = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_f333s"]
+material = SubResource("ShaderMaterial_2ydn3")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="Animation" id="Animation_2ydn3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpawnEffect:mesh:material:shader_parameter/showing_point")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_xhbpr"]
+resource_name = "spawn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpawnEffect:mesh:material:shader_parameter/showing_point")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.5, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpawnEffect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f333s"]
+_data = {
+&"RESET": SubResource("Animation_2ydn3"),
+&"spawn": SubResource("Animation_xhbpr")
+}
+
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_2bop2")
+min_spawn_rate = 7.0
+max_spawn_rate = 15.0
 enemies = Array[PackedScene]([ExtResource("2_mdv8j")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_xhbpr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_2ydn3")
+
+[node name="SpawnEffect" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("SphereMesh_f333s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f333s")
+}
