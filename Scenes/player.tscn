@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3v2iggb5epkf"]
+[gd_scene load_steps=13 format=3 uid="uid://c3v2iggb5epkf"]
 
 [ext_resource type="Script" uid="uid://bgc4j1vhg0u86" path="res://Scripts/Player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_cvnsp"]
 [ext_resource type="Shader" uid="uid://cvt4c16kn2a60" path="res://Scenes/vanish.gdshader" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cxe84evs26vxv" path="res://Scenes/hud.tscn" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://c1pywvyohesnk" path="res://Sounds/Gun Shot.mp3" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://dum1xlruqldvv" path="res://Sounds/Step.mp3" id="6_x3wgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wydro"]
 
@@ -99,3 +100,4 @@ libraries = {
 stream = ExtResource("5_fkybt")
 
 [node name="StepSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_x3wgy")

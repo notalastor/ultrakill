@@ -190,8 +190,8 @@ func _physics_process(delta: float) -> void:
 	if headbob_y_sign != last_headbob_sign:
 		if last_headbob_sign < 0.0:
 			$StepSound.play()
-			last_headbob_sign = headbob_y_sign
-			last_headbob_y = headbob_position.y
+		last_headbob_sign = headbob_y_sign
+	last_headbob_y = headbob_position.y
 
 	# -------------------
 	# FOV

@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=16 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="PackedScene" uid="uid://c3v2iggb5epkf" path="res://Scenes/player.tscn" id="1_j0p05"]
+[ext_resource type="Script" uid="uid://cw6ha2nywe7g4" path="res://Scripts/world.gd" id="1_q2d71"]
 [ext_resource type="PackedScene" uid="uid://doyxp25wrec6o" path="res://Scenes/endpoint.tscn" id="2_5nsto"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_j0p05"]
 [ext_resource type="PackedScene" uid="uid://rfev0mjyx5v5" path="res://Scenes/enemy.tscn" id="4_gjpho"]
@@ -42,6 +43,7 @@ uv1_triplanar = true
 uv2_triplanar = true
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_q2d71")
 
 [node name="world" type="Node3D" parent="."]
 
