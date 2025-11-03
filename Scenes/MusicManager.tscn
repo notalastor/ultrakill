@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dwevmp2c8142q"]
 
-[ext_resource type="AudioStream" uid="uid://bhu6d4y5024ci" path="res://Level 1 - Above the iron fury.mp3" id="1_iysw5"]
+[ext_resource type="AudioStream" uid="uid://dtwy3lg7isv4e" path="res://Sounds/A sinful impulse.mp3" id="1_iysw5"]
 
 [node name="Node" type="Node"]
 

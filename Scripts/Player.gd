@@ -46,6 +46,8 @@ const CAM_Y_OFFSET_FOLLOW_SPEED: float = 0.999825
 const BOB_FREQ: float = 2.4
 const BOB_AMP: float = 0.08
 var t_bob: float = 0.0
+var last_headbob_y: float
+var last_headbob_sign: float
 
 # FOV variables
 const BASE_FOV: float = 75.0
@@ -71,6 +73,7 @@ static var instance: Player
 @onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var shoot_point: Node3D = %ShootPoint
+
 
 var change_scene: bool = false
 
@@ -181,7 +184,14 @@ func _physics_process(delta: float) -> void:
 	target_cam_y_offset = CAMERA_Y_SLIDE_OFFSET * float(sliding)
 	current_cam_y_offset = lerpf(current_cam_y_offset, target_cam_y_offset, 1.0 - (1.0 - CAM_Y_OFFSET_FOLLOW_SPEED) ** delta)
 
-	camera.transform.origin = _headbob(t_bob) + current_cam_y_offset * Vector3.UP
+	var headbob_position: Vector3 = _headbob(t_bob)
+	camera.transform.origin = headbob_position + current_cam_y_offset * Vector3.UP
+	var headbob_y_sign: float = sign(headbob_position.y - last_headbob_y)
+	if headbob_y_sign != last_headbob_sign:
+		if last_headbob_sign < 0.0:
+			$StepSound.play()
+			last_headbob_sign = headbob_y_sign
+			last_headbob_y = headbob_position.y
 
 	# -------------------
 	# FOV
@@ -274,6 +284,7 @@ func shoot() -> void:
 		return
 	if ammo > 0:
 		launch_bullet(preload("res://Scenes/player_bullet.tscn").instantiate(), shoot_point.global_position, -shoot_point.global_transform.basis[2].normalized(), 75.0)
+		$ShootSound.play()
 		ammo -= 1
 		print("Bang! Ammo left:", ammo)
 		update_ammo_ui()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtwy3lg7isv4e"
+path="res://.godot/imported/A sinful impulse.mp3-96c09a675318e609438c5c23a28aad88.mp3str"
+
+[deps]
+
+source_file="res://Sounds/A sinful impulse.mp3"
+dest_files=["res://.godot/imported/A sinful impulse.mp3-96c09a675318e609438c5c23a28aad88.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
