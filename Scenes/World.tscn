@@ -57,6 +57,7 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02348, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06603432, 0.04744482, -0.09254074)
 navigation_mesh = SubResource("NavigationMesh_5nsto")
 
 [node name="lvl" type="CSGCombiner3D" parent="NavigationRegion3D"]
@@ -108,7 +109,7 @@ target = NodePath("../Player")
 shooter = true
 
 [node name="Area3D" parent="." instance=ExtResource("5_p70al")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27433, 0.869041, -26.2788)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27815, 0.87969357, -26.280916)
 
 [node name="Area3D2" parent="." instance=ExtResource("6_45d1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1458, 0.5, -29.4412)

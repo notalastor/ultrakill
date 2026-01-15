@@ -1,21 +1,61 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkxlett7syrfl"]
+[gd_scene load_steps=8 format=3 uid="uid://bkxlett7syrfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqvb2me8wc475" path="res://Scenes/powerup_base.tscn" id="1_lxmqd"]
 [ext_resource type="Script" uid="uid://pk3n2jvfuhdb" path="res://Scripts/health_powerup.gd" id="2_144cr"]
+[ext_resource type="ArrayMesh" uid="uid://dq3yc7ia1ey4" path="res://HealthPowerup.obj" id="3_jmfcc"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lxmqd"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_t3h3r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_144cr"]
-albedo_color = Color(1, 0, 0, 1)
+[sub_resource type="Animation" id="Animation_jmfcc"]
+resource_name = "main"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0), Vector3(0, 4.7036624, 0)]
+}
 
-[sub_resource type="BoxMesh" id="BoxMesh_jmfcc"]
-material = SubResource("StandardMaterial3D_144cr")
+[sub_resource type="Animation" id="Animation_t3h3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1tih"]
+_data = {
+&"RESET": SubResource("Animation_t3h3r"),
+&"main": SubResource("Animation_jmfcc")
+}
 
 [node name="Area3D" instance=ExtResource("1_lxmqd")]
 script = ExtResource("2_144cr")
 
 [node name="CollisionShape3D" parent="." index="0"]
-shape = SubResource("BoxShape3D_lxmqd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.93452907, 0)
+shape = SubResource("BoxShape3D_t3h3r")
 
 [node name="MeshInstance3D" parent="." index="1"]
-mesh = SubResource("BoxMesh_jmfcc")
+transform = Transform3D(-6.7752652e-09, 0, 0.155, 0, 0.155, 0, -0.155, 0, -6.7752652e-09, 0, 0.24027693, -0.00023305416)
+mesh = ExtResource("3_jmfcc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_p1tih")
+}
+autoplay = "main"
