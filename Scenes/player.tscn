@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3v2iggb5epkf"]
+[gd_scene load_steps=16 format=3 uid="uid://c3v2iggb5epkf"]
 
 [ext_resource type="Script" uid="uid://bgc4j1vhg0u86" path="res://Scripts/Player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_cvnsp"]
@@ -60,6 +60,42 @@ _data = {
 &"fade": SubResource("Animation_6t5aa")
 }
 
+[sub_resource type="Animation" id="Animation_x3wgy"]
+resource_name = "reload"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.291912, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3smsa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6.291912, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8erm5"]
+_data = {
+&"RESET": SubResource("Animation_3smsa"),
+&"reload": SubResource("Animation_x3wgy")
+}
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4flbx")
 
@@ -72,7 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67939, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.341569, -0.217496, -0.341015)
+transform = Transform3D(1, 0, 0, 0, 0.9999619, -0.008726661, 0, 0.008726661, 0.9999619, 0.341569, -0.217496, -0.341015)
 size = Vector3(0.1, 0.1, 0.5)
 material = SubResource("StandardMaterial3D_6t5aa")
 
@@ -101,3 +137,10 @@ stream = ExtResource("5_fkybt")
 
 [node name="StepSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_x3wgy")
+
+[node name="ReloadAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../Head/Camera3D/CSGBox3D")
+libraries = {
+&"": SubResource("AnimationLibrary_8erm5")
+}

@@ -240,7 +240,7 @@ func camera_tilt(input_vector: Vector2, delta: float) -> void:
 		camera.rotation.z = lerpf(camera.rotation.z, -input_vector.x / 10, 10 * delta)
 
 func weapon_sway(delta: float) -> void:
-	if weapon_pivot:
+	if weapon_pivot and !is_reloading:
 		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
 		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
 
@@ -294,6 +294,7 @@ func shoot() -> void:
 func start_reload() -> void:
 	if ammo == reload_ammount or max_ammo == 0:
 		return
+	%ReloadAnimationPlayer.play(&"reload")
 	
 	is_reloading = true
 	print("Reloading...")
