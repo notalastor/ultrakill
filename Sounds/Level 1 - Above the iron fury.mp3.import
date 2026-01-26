@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhu6d4y5024ci"
+path="res://.godot/imported/Level 1 - Above the iron fury.mp3-292c713a1fc56b420c5e078a873c2f8f.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Level 1 - Above the iron fury.mp3"
+dest_files=["res://.godot/imported/Level 1 - Above the iron fury.mp3-292c713a1fc56b420c5e078a873c2f8f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

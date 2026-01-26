@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://q2uqdv560fl2"
+path="res://.godot/imported/God-forsaken sculpture.mp3-f3f603c5fa7022662ac03b015e7f3e53.mp3str"
+
+[deps]
+
+source_file="res://Scenes/God-forsaken sculpture.mp3"
+dest_files=["res://.godot/imported/God-forsaken sculpture.mp3-f3f603c5fa7022662ac03b015e7f3e53.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
