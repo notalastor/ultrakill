@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyars3g5rwddg"]
+[gd_scene format=3 uid="uid://dyars3g5rwddg"]
 
 [ext_resource type="Script" uid="uid://clemc06qqplgb" path="res://Scripts/main_menu.gd" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_1ehe0"]
@@ -89,10 +89,10 @@ _data = {
 &"main_menu_idle": SubResource("Animation_opfnp")
 }
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=284741291]
 script = ExtResource("1_28flt")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=818403875]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +100,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1164215126]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -114,49 +114,47 @@ offset_bottom = 89.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayButton" type="Button" parent="Control/VBoxContainer"]
+[node name="PlayButton" type="Button" parent="Control/VBoxContainer" unique_id=1662494303]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Play"
 
-[node name="SettingsButton" type="Button" parent="Control/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Control/VBoxContainer" unique_id=614179987]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="Control/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="Control/VBoxContainer" unique_id=1439906287]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Exit"
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=162657748]
 transform = Transform3D(1, 0, 0, 0, 0.9555824, 0.2947242, 0, -0.2947242, 0.9555824, 0, 12.704415, 0)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1285946694]
 environment = SubResource("Environment_1ehe0")
 
-[node name="random shape3" type="CSGCylinder3D" parent="."]
+[node name="random shape3" type="CSGCylinder3D" parent="." unique_id=2081146349]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18355083, 5.125, -5.435519)
 use_collision = true
 radius = 3.0
 height = 10.25
 material = SubResource("StandardMaterial3D_n45e2")
 
-[node name="Area3D" parent="random shape3" instance=ExtResource("3_ce3w2")]
+[node name="Area3D" parent="random shape3" unique_id=1380734302 instance=ExtResource("3_ce3w2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33785, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1114234347]
 transform = Transform3D(-0.9986038, 0, -0.052823894, 0, 1, 0, 0.052823894, 0, -0.9986038, 0, 11.339109, -4.9339113)
 light_color = Color(1, 0, 0.016666412, 1)
 light_energy = 5.188
 light_indirect_energy = 1.69
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_yhxw7")
-}
-autoplay = "main_menu_idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=996766952]
+libraries/ = SubResource("AnimationLibrary_yhxw7")
+autoplay = &"main_menu_idle"
 
 [connection signal="pressed" from="Control/VBoxContainer/PlayButton" to="." method="button_play"]
 [connection signal="pressed" from="Control/VBoxContainer/SettingsButton" to="." method="button_settings"]

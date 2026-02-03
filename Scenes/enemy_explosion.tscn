@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://btxraywrgm02"]
+[gd_scene format=3 uid="uid://btxraywrgm02"]
 
-[ext_resource type="QuadMesh" uid="uid://b2kc6wwxxd5di" path="res://Meshes/particle_circle_quad.tres" id="1_aqpx6"]
+[ext_resource type="QuadMesh" uid="uid://b2876psfvfyxw" path="res://Meshes/particle_circle_quad.tres" id="1_aqpx6"]
 [ext_resource type="Gradient" uid="uid://c3u4og8vx54ar" path="res://Gradients/basic_white_alpha_gradient.tres" id="2_0anyp"]
 [ext_resource type="Curve" uid="uid://vuwsckbmvwq" path="res://Curves/scale_down_curve.tres" id="2_jeqfe"]
 [ext_resource type="Script" uid="uid://bg8wtfsyfm5v3" path="res://Scripts/particles_auto_emit.gd" id="4_g0gxi"]
 [ext_resource type="Curve" uid="uid://dsbmj7lrni0jk" path="res://Curves/scale_up_curve.tres" id="5_5xbum"]
 
-[node name="CPUParticles3D" type="CPUParticles3D"]
+[node name="CPUParticles3D" type="CPUParticles3D" unique_id=1321672911]
 emitting = false
 amount = 50
 one_shot = true
@@ -22,7 +22,7 @@ color = Color(1, 0.748666, 0.244371, 1)
 color_ramp = ExtResource("2_0anyp")
 script = ExtResource("4_g0gxi")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=621300514]
 emitting = false
 amount = 40
 one_shot = true
@@ -40,7 +40,7 @@ scale_amount_curve = ExtResource("2_jeqfe")
 color = Color(0.52549, 1, 1, 1)
 color_ramp = ExtResource("2_0anyp")
 
-[node name="CPUParticles3D2" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D2" type="CPUParticles3D" parent="." unique_id=1546473162]
 emitting = false
 amount = 1
 lifetime = 0.5

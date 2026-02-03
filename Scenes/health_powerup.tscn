@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkxlett7syrfl"]
+[gd_scene format=3 uid="uid://bkxlett7syrfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqvb2me8wc475" path="res://Scenes/powerup_base.tscn" id="1_lxmqd"]
 [ext_resource type="Script" uid="uid://pk3n2jvfuhdb" path="res://Scripts/health_powerup.gd" id="2_144cr"]
@@ -43,7 +43,7 @@ _data = {
 &"main": SubResource("Animation_jmfcc")
 }
 
-[node name="Area3D" instance=ExtResource("1_lxmqd")]
+[node name="Area3D" unique_id=142243005 instance=ExtResource("1_lxmqd")]
 script = ExtResource("2_144cr")
 
 [node name="CollisionShape3D" parent="." index="0"]
@@ -54,8 +54,6 @@ shape = SubResource("BoxShape3D_t3h3r")
 transform = Transform3D(-6.7752652e-09, 0, 0.155, 0, 0.155, 0, -0.155, 0, -6.7752652e-09, 0, 0.24027693, -0.00023305416)
 mesh = ExtResource("3_jmfcc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-&"": SubResource("AnimationLibrary_p1tih")
-}
-autoplay = "main"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=1967760761]
+libraries/ = SubResource("AnimationLibrary_p1tih")
+autoplay = &"main"

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://vs4vbkvq6mk8"]
+[gd_scene format=3 uid="uid://vs4vbkvq6mk8"]
 
-[ext_resource type="QuadMesh" uid="uid://b2kc6wwxxd5di" path="res://Meshes/particle_circle_quad.tres" id="1_8wtjd"]
+[ext_resource type="QuadMesh" uid="uid://b2876psfvfyxw" path="res://Meshes/particle_circle_quad.tres" id="1_8wtjd"]
 [ext_resource type="Curve" uid="uid://vuwsckbmvwq" path="res://Curves/scale_down_curve.tres" id="2_yv76b"]
 [ext_resource type="Gradient" uid="uid://c3u4og8vx54ar" path="res://Gradients/basic_white_alpha_gradient.tres" id="3_n7ylu"]
 [ext_resource type="Script" uid="uid://bg8wtfsyfm5v3" path="res://Scripts/particles_auto_emit.gd" id="4_x43in"]
@@ -12,7 +12,7 @@ _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 0.338983), 0.0, 0.0, 0, 0, Vector2(0.0222222, 5), 0.0, 0.0, 0, 0, Vector2(0.0888889, 1.09399), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="CPUParticles3D" type="CPUParticles3D"]
+[node name="CPUParticles3D" type="CPUParticles3D" unique_id=1242465730]
 emitting = false
 amount = 50
 one_shot = true
@@ -30,7 +30,7 @@ color = Color(1, 0.341176, 0.0784314, 1)
 color_ramp = ExtResource("3_n7ylu")
 script = ExtResource("4_x43in")
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=1925621665]
 emitting = false
 amount = 40
 one_shot = true

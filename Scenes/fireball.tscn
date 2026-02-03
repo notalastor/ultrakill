@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://oixqejb6ghrh"]
+[gd_scene format=4 uid="uid://oixqejb6ghrh"]
 
 [ext_resource type="Script" uid="uid://bvmguv5yyhac1" path="res://Scenes/fireball.gd" id="1_xi7wk"]
 
@@ -85,22 +85,20 @@ shadow_mesh = SubResource("ArrayMesh_i1vkf")
 [sub_resource type="BoxShape3D" id="BoxShape3D_xi7wk"]
 size = Vector3(1.32068, 1.59607, 2.19263)
 
-[node name="fireball" type="Node3D"]
+[node name="fireball" type="Node3D" unique_id=409896595]
 script = ExtResource("1_xi7wk")
 
-[node name="ball" type="MeshInstance3D" parent="."]
+[node name="ball" type="MeshInstance3D" parent="." unique_id=620045665]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3owx5")
-skeleton = NodePath("")
 
-[node name="fireball" type="MeshInstance3D" parent="ball"]
+[node name="fireball" type="MeshInstance3D" parent="ball" unique_id=241900733]
 transform = Transform3D(0.677811, 0.735237, 0, -0.735237, 0.677811, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_8r1y1")
-skeleton = NodePath("")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=2092503842]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1057072979]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0530396, 0.020813, 0.435425)
 shape = SubResource("BoxShape3D_xi7wk")
 

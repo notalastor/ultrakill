@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ky357qi3nctm"]
+[gd_scene format=3 uid="uid://ky357qi3nctm"]
 
 [ext_resource type="Script" uid="uid://b4n8m6prsqknc" path="res://Scripts/player_bullet.gd" id="1_bg8x2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bg8x2"]
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="RigidBody3D" type="RigidBody3D" unique_id=1671859554]
 contact_monitor = true
 max_contacts_reported = 16
 script = ExtResource("1_bg8x2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1596106909]
 shape = SubResource("SphereShape3D_bg8x2")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=2057639189]

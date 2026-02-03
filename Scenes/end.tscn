@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://76yqf0uc4jyf"]
+[gd_scene format=3 uid="uid://76yqf0uc4jyf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b71xg"]
 font_size = 186
 font_color = Color(0, 0.980392, 0, 1)
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1191065183]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=437512457]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://k58g00l0kt0t"]
+[gd_scene format=3 uid="uid://k58g00l0kt0t"]
 
 [ext_resource type="PackedScene" uid="uid://bqvb2me8wc475" path="res://Scenes/powerup_base.tscn" id="1_sgi5p"]
-[ext_resource type="Script" path="res://Scripts/ammo_powerup.gd" id="2_sgi5p"]
+[ext_resource type="Script" uid="uid://b6syr6l6fxqpw" path="res://Scripts/ammo_powerup.gd" id="2_sgi5p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lxmqd"]
 
@@ -11,7 +11,7 @@ albedo_color = Color(1, 0.65, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ppbtv"]
 material = SubResource("StandardMaterial3D_sgi5p")
 
-[node name="AmmoPowerup" instance=ExtResource("1_sgi5p")]
+[node name="AmmoPowerup" unique_id=367863593 instance=ExtResource("1_sgi5p")]
 script = ExtResource("2_sgi5p")
 
 [node name="CollisionShape3D" parent="." index="0"]

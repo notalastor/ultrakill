@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://doyxp25wrec6o"]
+[gd_scene format=4 uid="uid://doyxp25wrec6o"]
 
 [ext_resource type="Script" uid="uid://wenk7x0gcx2s" path="res://Scripts/endpoint.gd" id="1_biuwk"]
 [ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_0g6ej"]
@@ -90,17 +90,17 @@ material = SubResource("ShaderMaterial_mtoxv")
 radius = 0.68
 height = 0.12
 
-[node name="Area3D" type="Area3D"]
+[node name="Area3D" type="Area3D" unique_id=120262949]
 script = ExtResource("1_biuwk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1490720957]
 shape = SubResource("BoxShape3D_mtoxv")
 debug_color = Color(0.125441, 0.863708, 1, 0.42)
 
-[node name="area" type="MeshInstance3D" parent="."]
+[node name="area" type="MeshInstance3D" parent="." unique_id=6401338]
 mesh = SubResource("ArrayMesh_biuwk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=440555888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299736, 0)
 mesh = SubResource("SphereMesh_toiut")
 

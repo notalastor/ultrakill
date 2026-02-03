@@ -70,7 +70,7 @@ static var instance: Player
 # Scene references
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
-@onready var weapon_pivot: Node3D = $Head/Camera3D/CSGBox3D
+@onready var weapon_pivot: Node3D = $Head/Camera3D/gun
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var shoot_point: Node3D = %ShootPoint
 
@@ -242,7 +242,7 @@ func camera_tilt(input_vector: Vector2, delta: float) -> void:
 func weapon_sway(delta: float) -> void:
 	if weapon_pivot and !is_reloading:
 		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
-		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
+		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))- PI * 0.5
 
 func change_effect():
 	animation.play("fade")
@@ -294,7 +294,6 @@ func shoot() -> void:
 func start_reload() -> void:
 	if ammo == reload_ammount or max_ammo == 0:
 		return
-	%ReloadAnimationPlayer.play(&"reload")
 	
 	is_reloading = true
 	print("Reloading...")

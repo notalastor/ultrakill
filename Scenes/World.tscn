@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="PackedScene" uid="uid://c3v2iggb5epkf" path="res://Scenes/player.tscn" id="1_j0p05"]
 [ext_resource type="Script" uid="uid://cw6ha2nywe7g4" path="res://Scripts/world.gd" id="1_q2d71"]
@@ -42,36 +42,36 @@ uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 uv2_triplanar = true
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" unique_id=910771601]
 script = ExtResource("1_q2d71")
 
-[node name="world" type="Node3D" parent="."]
+[node name="world" type="Node3D" parent="." unique_id=1732538435]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="world"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world" unique_id=1709943921]
 environment = SubResource("Environment_g2h84")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="world"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="world" unique_id=185339662]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("1_j0p05")]
+[node name="Player" parent="." unique_id=1535486161 instance=ExtResource("1_j0p05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.02348, 0)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=5107564]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06603432, 0.04744482, -0.09254074)
 navigation_mesh = SubResource("NavigationMesh_5nsto")
 
-[node name="lvl" type="CSGCombiner3D" parent="NavigationRegion3D"]
+[node name="lvl" type="CSGCombiner3D" parent="NavigationRegion3D" unique_id=646583838]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/lvl"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/lvl" unique_id=1225960605]
 material_override = SubResource("StandardMaterial3D_5cjrv")
 use_collision = true
 flip_faces = true
 size = Vector3(20, 10, 34)
 material = SubResource("StandardMaterial3D_5nsto")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/lvl"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/lvl" unique_id=859095701]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -42)
 material_override = SubResource("StandardMaterial3D_5cjrv")
 use_collision = true
@@ -79,43 +79,43 @@ flip_faces = true
 size = Vector3(50, 24, 50)
 material = SubResource("StandardMaterial3D_gjpho")
 
-[node name="random shape" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="random shape" type="CSGBox3D" parent="NavigationRegion3D" unique_id=374257022]
 transform = Transform3D(3.64, 0, 0, 0, 3.64, 0, 0, 0, 3.64, -10, 1.8, -43)
 use_collision = true
 material = SubResource("StandardMaterial3D_gjpho")
 
-[node name="random shape2" type="CSGBox3D" parent="NavigationRegion3D"]
+[node name="random shape2" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1412740039]
 transform = Transform3D(3.64, 0, 0, 0, 3.64, 0, 0, 0, 3.64, -2.78608, 5, -49)
 use_collision = true
 material = SubResource("StandardMaterial3D_gjpho")
 
-[node name="random shape3" type="CSGCylinder3D" parent="NavigationRegion3D"]
+[node name="random shape3" type="CSGCylinder3D" parent="NavigationRegion3D" unique_id=2114282768]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5.125, -44)
 use_collision = true
 radius = 3.0
 height = 10.25
 material = SubResource("StandardMaterial3D_gjpho")
 
-[node name="Area3D" parent="NavigationRegion3D/random shape3" instance=ExtResource("2_5nsto")]
+[node name="Area3D" parent="NavigationRegion3D/random shape3" unique_id=1270185372 instance=ExtResource("2_5nsto")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33785, 0)
 
-[node name="enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_gjpho")]
+[node name="enemy" parent="." unique_id=535150942 node_paths=PackedStringArray("target") instance=ExtResource("4_gjpho")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11312, -30.7852)
 target = NodePath("../Player")
 
-[node name="enemy2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_gjpho")]
+[node name="enemy2" parent="." unique_id=1942634406 node_paths=PackedStringArray("target") instance=ExtResource("4_gjpho")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.58383, 2.11312, -30.7852)
 target = NodePath("../Player")
 shooter = true
 
-[node name="Area3D" parent="." instance=ExtResource("5_p70al")]
+[node name="Area3D" parent="." unique_id=831597179 instance=ExtResource("5_p70al")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27815, 0.87969357, -26.280916)
 
-[node name="Area3D2" parent="." instance=ExtResource("6_45d1s")]
+[node name="Area3D2" parent="." unique_id=373515112 instance=ExtResource("6_45d1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1458, 0.5, -29.4412)
 
-[node name="Area3D3" parent="." instance=ExtResource("6_45d1s")]
+[node name="Area3D3" parent="." unique_id=1713007914 instance=ExtResource("6_45d1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.995, 0.5, -58.4982)
 
-[node name="AmmoPowerup" parent="." instance=ExtResource("7_y7y61")]
+[node name="AmmoPowerup" parent="." unique_id=1543795734 instance=ExtResource("7_y7y61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5043, 0, -28.7005)

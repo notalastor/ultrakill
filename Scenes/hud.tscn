@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxe84evs26vxv"]
+[gd_scene format=3 uid="uid://cxe84evs26vxv"]
 
 [ext_resource type="Script" uid="uid://d0akct6g5ys1s" path="res://Scripts/hud.gd" id="1_e0onf"]
 
@@ -85,10 +85,10 @@ _data = {
 &"effect": SubResource("Animation_e0onf")
 }
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1271167804]
 script = ExtResource("1_e0onf")
 
-[node name="Anchor" type="Control" parent="."]
+[node name="Anchor" type="Control" parent="." unique_id=1407655019]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +97,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ProgressBars" type="VBoxContainer" parent="Anchor"]
+[node name="ProgressBars" type="VBoxContainer" parent="Anchor" unique_id=2146660902]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -109,19 +109,19 @@ offset_bottom = -92.0
 grow_vertical = 0
 scale = Vector2(2, 2)
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Anchor/ProgressBars"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Anchor/ProgressBars" unique_id=1935691373]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2" unique_id=1548702758]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer" unique_id=1720288253]
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 3.55
 theme_override_constants/separation = -2
 
-[node name="CombatBar1" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="CombatBar1" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1625197497]
 custom_minimum_size = Vector2(85, 10)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -132,7 +132,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="CombatBar2" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="CombatBar2" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1211307111]
 custom_minimum_size = Vector2(85, 10)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -143,7 +143,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="CombatBar3" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer"]
+[node name="CombatBar3" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1174287386]
 custom_minimum_size = Vector2(85, 10)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -154,7 +154,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="Anchor/ProgressBars/HBoxContainer2/VBoxContainer" unique_id=19872827]
 custom_minimum_size = Vector2(250, 30)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -165,7 +165,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="Bullet" type="Panel" parent="Anchor/ProgressBars/HBoxContainer2"]
+[node name="Bullet" type="Panel" parent="Anchor/ProgressBars/HBoxContainer2" unique_id=1785234062]
 custom_minimum_size = Vector2(60, 27)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -173,7 +173,7 @@ size_flags_vertical = 10
 size_flags_stretch_ratio = 28.35
 theme_override_styles/panel = SubResource("StyleBoxFlat_6fbih")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/Bullet"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Anchor/ProgressBars/HBoxContainer2/Bullet" unique_id=44871587]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,19 +183,19 @@ grow_vertical = 2
 theme_override_constants/separation = 11
 alignment = 1
 
-[node name="CurrentAmount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
+[node name="CurrentAmount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer" unique_id=1576295436]
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 text = "--"
 
-[node name="Amount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer"]
+[node name="Amount" type="Label" parent="Anchor/ProgressBars/HBoxContainer2/Bullet/HBoxContainer" unique_id=1277307630]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.9, 0.018, 0.5325, 1)
 theme_override_font_sizes/font_size = 16
 text = "--"
 
-[node name="ColorRect" type="ColorRect" parent="Anchor"]
+[node name="ColorRect" type="ColorRect" parent="Anchor" unique_id=1700019857]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,8 +205,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0, 0, 0)
 
-[node name="DamageEffectAnimation" type="AnimationPlayer" parent="Anchor/ColorRect"]
+[node name="DamageEffectAnimation" type="AnimationPlayer" parent="Anchor/ColorRect" unique_id=1032839509]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_bjfho")
-}
+libraries/ = SubResource("AnimationLibrary_bjfho")

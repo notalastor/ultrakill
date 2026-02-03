@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://csbsjda3h8k6f"]
+[gd_scene format=3 uid="uid://csbsjda3h8k6f"]
 
 [ext_resource type="Script" uid="uid://u2btocrcwo7p" path="res://spawner.gd" id="1_2bop2"]
 [ext_resource type="PackedScene" uid="uid://rfev0mjyx5v5" path="res://Scenes/enemy.tscn" id="2_mdv8j"]
-[ext_resource type="Shader" uid="uid://jbymnpyslmyy" path="res://Scenes/spawner_effect.gdshader" id="3_xhbpr"]
+[ext_resource type="Shader" uid="uid://cyojkotu148dh" path="res://Scenes/spawner_effect.gdshader" id="3_xhbpr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xhbpr"]
 
@@ -82,26 +82,24 @@ _data = {
 &"spawn": SubResource("Animation_xhbpr")
 }
 
-[node name="Area3D" type="Area3D"]
+[node name="Area3D" type="Area3D" unique_id=1591343530]
 script = ExtResource("1_2bop2")
 min_spawn_rate = 7.0
 max_spawn_rate = 15.0
 enemies = Array[PackedScene]([ExtResource("2_mdv8j")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=643143930]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_xhbpr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=44099774]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_2ydn3")
 
-[node name="SpawnEffect" type="MeshInstance3D" parent="."]
+[node name="SpawnEffect" type="MeshInstance3D" parent="." unique_id=279493176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 mesh = SubResource("SphereMesh_f333s")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_f333s")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1415120932]
+libraries/ = SubResource("AnimationLibrary_f333s")
