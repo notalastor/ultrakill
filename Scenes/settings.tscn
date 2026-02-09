@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://baj7e45h10atx"]
+
+[ext_resource type="Script" uid="uid://541ea1i4v7it" path="res://Scripts/settings.gd" id="1_lhmql"]
+[ext_resource type="Texture2D" uid="uid://cddmoo0jlyj3f" path="res://models/textures/Dark/texture_03.png" id="2_aaqfp"]
+[ext_resource type="PackedScene" uid="uid://doyxp25wrec6o" path="res://Scenes/endpoint.tscn" id="3_j2dne"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_j8vwj"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(8.346712e-06, 8.804277e-06, 9.276152e-06, 1)
+sky_cover_modulate = Color(0.08235059, 0.082350604, 0.08235059, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+sun_angle_max = 77.99
+
+[sub_resource type="Sky" id="Sky_48xlc"]
+sky_material = SubResource("ProceduralSkyMaterial_j8vwj")
+
+[sub_resource type="Environment" id="Environment_ude7g"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_48xlc")
+
+[sub_resource type="Animation" id="Animation_cp0ys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.0887442, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("random shape3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_opfnp"]
+resource_name = "main_menu_idle"
+length = 10.0
+loop_mode = 1
+step = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("random shape3:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0f04a"]
+_data = {
+&"RESET": SubResource("Animation_cp0ys"),
+&"main_menu_idle": SubResource("Animation_opfnp")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3nxq"]
+albedo_texture = ExtResource("2_aaqfp")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv2_triplanar = true
+
+[node name="Node3D" type="Node3D" unique_id=1165894142]
+script = ExtResource("1_lhmql")
+
+[node name="Control" type="Control" parent="." unique_id=767218585]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=657839465]
+modulate = Color(1, 1, 1, 0.7411765)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10240307, 0.12937465, 0.15634966, 1)
+
+[node name="Music_slider" type="HSlider" parent="Control" unique_id=144357838]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -373.5
+offset_top = -397.5
+offset_right = 373.5
+offset_bottom = -248.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SFX_slider" type="HSlider" parent="Control" unique_id=248958929]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -373.5
+offset_top = -149.5
+offset_right = 373.5
+offset_bottom = -0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="Control" unique_id=652031323]
+layout_mode = 0
+offset_left = 573.0
+offset_top = 870.0
+offset_right = 1323.0
+offset_bottom = 988.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "Back to Main Menu"
+
+[node name="GridContainer" type="GridContainer" parent="Control" unique_id=1069948164]
+layout_mode = 0
+offset_left = 814.0
+offset_top = 476.0
+offset_right = 1564.0
+offset_bottom = 594.0
+
+[node name="Music Label" type="Label" parent="Control" unique_id=1255475616]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 177.0
+offset_right = 366.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 50
+text = "Music"
+
+[node name="SFX Label" type="Label" parent="Control" unique_id=1651740335]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 429.0
+offset_right = 333.0
+offset_bottom = 498.0
+theme_override_font_sizes/font_size = 50
+text = "SFX"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2025688118]
+environment = SubResource("Environment_ude7g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=369443086]
+transform = Transform3D(-0.9986038, 0, -0.052823894, 0, 1, 0, 0.052823894, 0, -0.9986038, 0, 11.339109, -4.9339113)
+light_color = Color(1, 0, 0.016666412, 1)
+light_energy = 5.188
+light_indirect_energy = 1.69
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=887125610]
+transform = Transform3D(1, 0, 0, 0, 0.9555824, 0.2947242, 0, -0.2947242, 0.9555824, 0, 12.704415, 0)
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1616565406]
+libraries/ = SubResource("AnimationLibrary_0f04a")
+autoplay = &"main_menu_idle"
+
+[node name="random shape3" type="CSGCylinder3D" parent="." unique_id=741340225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18355083, 5.125, -5.435519)
+use_collision = true
+radius = 3.0
+height = 10.25
+material = SubResource("StandardMaterial3D_s3nxq")
+
+[node name="Area3D" parent="random shape3" unique_id=120262949 instance=ExtResource("3_j2dne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33785, 0)
+
+[connection signal="pressed" from="Control/BackButton" to="." method="BackButton_Pressed"]

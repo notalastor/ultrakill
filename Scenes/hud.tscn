@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxe84evs26vxv"]
 
 [ext_resource type="Script" uid="uid://d0akct6g5ys1s" path="res://Scripts/hud.gd" id="1_e0onf"]
+[ext_resource type="Texture2D" uid="uid://b5mvph8c1pjvn" path="res://models/white_crosshair-removebg-preview.png" id="2_fccik"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fccik"]
 bg_color = Color(0.48633, 0.632803, 0.686469, 1)
@@ -208,3 +209,20 @@ color = Color(1, 0, 0, 0)
 [node name="DamageEffectAnimation" type="AnimationPlayer" parent="Anchor/ColorRect" unique_id=1032839509]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_bjfho")
+
+[node name="TextureRect" type="TextureRect" parent="Anchor" unique_id=961229941]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.00003
+offset_top = -150.00002
+offset_right = 150.00003
+offset_bottom = 150.00002
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("2_fccik")
+expand_mode = 1
