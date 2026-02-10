@@ -110,7 +110,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.10240307, 0.12937465, 0.15634966, 1)
 
-[node name="Music_slider" type="HSlider" parent="Control" unique_id=144357838]
+[node name="MusicSlider" type="HSlider" parent="Control" unique_id=144357838]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -124,7 +125,8 @@ offset_bottom = -248.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SFX_slider" type="HSlider" parent="Control" unique_id=248958929]
+[node name="SFXSlider" type="HSlider" parent="Control" unique_id=248958929]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -200,4 +202,6 @@ material = SubResource("StandardMaterial3D_s3nxq")
 [node name="Area3D" parent="random shape3" unique_id=120262949 instance=ExtResource("3_j2dne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33785, 0)
 
+[connection signal="value_changed" from="Control/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Control/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="Control/BackButton" to="." method="BackButton_Pressed"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rlgbiiofnvm2"]
+
+[ext_resource type="Script" uid="uid://bxdnsyl5882pi" path="res://Scripts/save_manager.gd" id="1_up4r5"]
+
+[node name="Node" type="Node" unique_id=1666590320]
+script = ExtResource("1_up4r5")
