@@ -21,3 +21,11 @@ func display_ammo(current_ammo: int, max_ammo: int) -> void:
 
 func display_health(health: float) -> void:
 	health_bar.value = health
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE and !event.echo:
+			if !get_tree().paused:
+				add_child( preload("res://Scenes/pause_menu.tscn").instantiate())
+				get_tree().paused = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

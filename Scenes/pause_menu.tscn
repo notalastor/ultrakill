@@ -35,17 +35,19 @@ offset_bottom = 163.75
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1782740929]
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1782740929]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Resume"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1063267731]
+[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1063267731]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Settings"
 
-[node name="Button3" type="Button" parent="VBoxContainer" unique_id=28937617]
+[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=28937617]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
