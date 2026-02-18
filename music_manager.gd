@@ -3,8 +3,6 @@ extends Node
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-func _ready() -> void:
-	MusicManager.play_main_menu_music()
 
 func play_music(stream: AudioStream, volume_db: float = -16.0) -> void:
 	if !audio_stream_player.playing or audio_stream_player.stream != stream:
