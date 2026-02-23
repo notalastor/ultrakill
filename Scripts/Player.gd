@@ -73,7 +73,7 @@ static var instance: Player
 @onready var weapon_pivot: Node3D = $Head/Camera3D/gun
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var shoot_point: Node3D = %ShootPoint
-
+@onready var crosshair_raycast: RayCast3D = %RayCast3D
 
 var change_scene: bool = false
 
@@ -81,6 +81,7 @@ func _enter_tree() -> void:
 	Player.instance = self
 
 func _ready() -> void:
+	crosshair_raycast.add_exception(self)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	animation.play_backwards("fade")
 	update_ammo_ui()
@@ -283,7 +284,8 @@ func shoot() -> void:
 	if is_reloading:
 		return
 	if ammo > 0:
-		launch_bullet(preload("res://Scenes/player_bullet.tscn").instantiate(), shoot_point.global_position, -shoot_point.global_transform.basis[2].normalized(), 75.0)
+		var bullet_direction: Vector3 = ((crosshair_raycast.get_collision_point() - shoot_point.global_position) if crosshair_raycast.is_colliding() else -shoot_point.global_transform.basis[2]).normalized()
+		launch_bullet(preload("res://Scenes/player_bullet.tscn").instantiate(), shoot_point.global_position, bullet_direction, 75.0)
 		$ShootSound.play()
 		ammo -= 1
 		print("Bang! Ammo left:", ammo)

@@ -5,6 +5,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_bg8x2"]
 
 [node name="RigidBody3D" type="RigidBody3D" unique_id=1671859554]
+gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 16
 script = ExtResource("1_bg8x2")

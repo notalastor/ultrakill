@@ -210,19 +210,18 @@ color = Color(1, 0, 0, 0)
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_bjfho")
 
-[node name="TextureRect" type="TextureRect" parent="Anchor" unique_id=961229941]
+[node name="Crossshair" type="TextureRect" parent="Anchor" unique_id=961229941]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.00003
-offset_top = -150.00002
-offset_right = 150.00003
-offset_bottom = 150.00002
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.38, 0.38)
 texture = ExtResource("2_fccik")
 expand_mode = 1

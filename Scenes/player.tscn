@@ -85,6 +85,10 @@ transform = Transform3D(-8.7422774e-07, 0.17453322, 19.999239, 0, 19.999239, -0.
 unique_name_in_owner = true
 transform = Transform3D(-8.7422774e-07, 0.17453322, 19.999239, 0, 19.999239, -0.17453322, -20, -7.629089e-09, -8.741944e-07, -12.636384, 15.304289, 0.29251766)
 
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D" unique_id=1608746674]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -300)
+
 [node name="HUD" parent="." unique_id=1484214910 instance=ExtResource("4_vgqql")]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=436448556]
