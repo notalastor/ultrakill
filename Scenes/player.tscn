@@ -34,7 +34,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6t5aa"]
 resource_name = "fade"
-length = 1.181
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,7 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67939, 0)
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1399589712]
 
 [node name="gun" type="MeshInstance3D" parent="Head/Camera3D" unique_id=2044177359]
-transform = Transform3D(-2.1855695e-09, 0, -0.05, 0, 0.05, 0, 0.05, 0, -2.1855695e-09, 0.5355911, -0.80215156, -0.11993125)
+transform = Transform3D(-2.1855695e-09, 0, -0.05, 0, 0.05, 0, 0.05, 0, -2.1855695e-09, 0.5762597, -0.9965097, -0.9273751)
 mesh = ExtResource("2_x3wgy")
 
 [node name="ShootPoint" type="Marker3D" parent="Head/Camera3D/gun" unique_id=2020220914]

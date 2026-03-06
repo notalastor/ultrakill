@@ -242,8 +242,7 @@ func camera_tilt(input_vector: Vector2, delta: float) -> void:
 
 func weapon_sway(delta: float) -> void:
 	if weapon_pivot and !is_reloading:
-		weapon_pivot.rotation.x = lerpf(weapon_pivot.rotation.x, WEAPON_SWAY_AMOUNT * mouse_movement.y, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
-		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))- PI * 0.5
+		weapon_pivot.rotation.y = lerpf(weapon_pivot.rotation.y, WEAPON_SWAY_AMOUNT * mouse_movement.x - PI * 0.5, 1.0 - pow(1.0 - WEAPON_SWAY_SPEED, delta))
 
 func change_effect():
 	animation.play("fade")
@@ -299,8 +298,8 @@ func start_reload() -> void:
 	
 	is_reloading = true
 	print("Reloading...")
+	#%ReloadAnimation.play("reload")
 	await get_tree().create_timer(reload_time).timeout
-	
 	var empty_space = reload_ammount - ammo
 	var how_much: int = min(empty_space, max_ammo)
 	
