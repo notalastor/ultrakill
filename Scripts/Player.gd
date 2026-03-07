@@ -260,18 +260,15 @@ func knock_back_apply(delta: float):
 # ===================
 # HEALTH & AMMO LOGIC
 # ===================
-func take_damage(amount: int) -> void:
-	if change_scene == false:
+func take_damage(amount: float) -> void:
+	if !change_scene:
 		print("Player HP: ", health)
-		if health >= 10 and health - amount != 0:
-			health -= amount
+		health -= amount
+		if health > 0.0:
 			HUD.instance.display_damage_effect()
-			HUD.instance.display_health(health)
-		else: 
-			
+		else:
 			change_scene = true
-			await get_tree().create_timer(2).timeout
-			get_tree().reload_current_scene()
+			get_tree().create_timer(2.0).timeout.connect(get_tree().reload_current_scene)
 			
 func launch_bullet(bullet: PlayerBullet, launch_position: Vector3, launch_direction: Vector3, launch_speed: float) -> void:
 	bullet.linear_velocity = launch_direction * launch_speed
